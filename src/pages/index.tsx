@@ -22,7 +22,7 @@ function RecentTweets() {
     { getNextPageParam: (lastPage) => lastPage.nextCursor }
   );
 
-  if (!tweets || !tweets.hasNextPage) return null;
+  if (tweets.hasNextPage == undefined) return null;
 
   return (
     <InfiniteTweetList
