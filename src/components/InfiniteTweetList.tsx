@@ -6,6 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { ProfileImage } from "~/components/ProfileImage";
 import { IconHoverEffect } from "./IconHoverEffect";
 import { api } from "~/utils/api";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 type Tweet = {
   id: string;
@@ -31,7 +32,7 @@ export function InfiniteTweetList({
   hasMore,
   fetchNewTweets,
 }: InfiniteTweetListProps) {
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <h1>Error</h1>;
   if (tweets == null || tweets?.length === 0) {
     return (
@@ -45,7 +46,7 @@ export function InfiniteTweetList({
         dataLength={tweets.length}
         next={fetchNewTweets}
         hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
+        loader={<LoadingSpinner />}
       >
         {tweets.map((tweet) => (
           <TweetCard key={tweet.id} {...tweet} />
